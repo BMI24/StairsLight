@@ -1178,6 +1178,16 @@ namespace StairsLight
             set { _packedValue = value; }
         }
 
+        public static Color Lerp(Color value1, Color value2, Single amount)
+        {
+            byte Red = (byte)MathHelper.Clamp(MathHelper.Lerp(value1.R, value2.R, amount), Byte.MinValue, Byte.MaxValue);
+            byte Green = (byte)MathHelper.Clamp(MathHelper.Lerp(value1.G, value2.G, amount), Byte.MinValue, Byte.MaxValue);
+            byte Blue = (byte)MathHelper.Clamp(MathHelper.Lerp(value1.B, value2.B, amount), Byte.MinValue, Byte.MaxValue);
+            byte Alpha = (byte)MathHelper.Clamp(MathHelper.Lerp(value1.A, value2.A, amount), Byte.MinValue, Byte.MaxValue);
+
+            return new Color(Red, Green, Blue, Alpha);
+        }
+
         public override string ToString()
         {
             return string.Format("[Color: R={0}, G={1}, B={2}, A={3}, PackedValue={4}]", R, G, B, A, PackedValue);

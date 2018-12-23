@@ -13,9 +13,9 @@ namespace StairsLight
         {
             Console.WriteLine("Hello World!");
 
-            Stripes.Add(new LedStripe(16, 21, 20));
-            Stripes.Add(new LedStripe(13, 26, 19));
-            Stripes.Add(new LedStripe(6, 12, 5));
+            Stripes.Add(new LedStripe(16, 21, 20, new ConstantColorProvider(Color.Black)));
+            Stripes.Add(new LedStripe(13, 26, 19, new ConstantColorProvider(Color.Black)));
+            Stripes.Add(new LedStripe(6, 12, 5, new ConstantColorProvider(Color.Black)));
 
             MainAction();
 
@@ -33,9 +33,10 @@ namespace StairsLight
                     if (colorInput == "exit")
                         return;
                     var colorInputSplit = colorInput.Split(',');
-                    string colorName = colorInputSplit[0];
-                    float brightness = Convert.ToSingle(colorInputSplit[1]);
-                    stripe.SetColor(Color.GetColor(colorName) * brightness);
+                    string color1Name = colorInputSplit[0];
+                    string color2Name = colorInputSplit[1];
+                    float brightness = Convert.ToSingle(colorInputSplit[2]);
+                    stripe.ColorProvider = new GradientColorProvider(Color.GetColor(color1Name) * brightness, Color.GetColor(color2Name) * brightness);
                 }
             }
         }
