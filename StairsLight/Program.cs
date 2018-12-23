@@ -14,7 +14,7 @@ namespace StairsLight
             Console.WriteLine("Hello World!");
 
             Stripes.Add(new LedStripe(16, 21, 20));
-            Stripes.Add(new LedStripe(13, 19, 26));
+            Stripes.Add(new LedStripe(13, 26, 19));
             Stripes.Add(new LedStripe(6, 12, 5));
 
             MainAction();
