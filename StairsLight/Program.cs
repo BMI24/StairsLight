@@ -29,10 +29,13 @@ namespace StairsLight
             {
                 foreach (var stripe in Stripes)
                 {
-                    string colorName = Console.ReadLine();
-                    if (colorName == "exit")
+                    string colorInput = Console.ReadLine();
+                    if (colorInput == "exit")
                         return;
-                    stripe.SetColor(Color.GetColor(colorName));
+                    var colorInputSplit = colorInput.Split(',');
+                    string colorName = colorInputSplit[0];
+                    float brightness = Convert.ToSingle(colorInputSplit[1]);
+                    stripe.SetColor(Color.GetColor(colorName) * brightness);
                 }
             }
         }
