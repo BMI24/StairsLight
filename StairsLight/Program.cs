@@ -32,10 +32,7 @@ namespace StairsLight
                     string colorName = Console.ReadLine();
                     if (colorName == "exit")
                         return;
-                    var colorNameSplit = colorName.Split(',');
-                    stripe.SetColor(new Color(Convert.ToByte(colorNameSplit[0])
-                        , Convert.ToByte(colorNameSplit[1])
-                        , Convert.ToByte(colorNameSplit[2])));
+                    stripe.SetColor(Color.GetColor(colorName));
                 }
             }
         }
