@@ -21,6 +21,8 @@ namespace StairsLight
 
         public void SetDutyCylce(float percentage)
         {
+            if (percentage > 1f || percentage < 0f)
+                throw new NotSupportedException($"The percentage must be between 0.0f and 1.0f, but it was {percentage}");
             Pin.SoftPwmValue = Convert.ToInt32(PwmRange * percentage);
         }
     }
