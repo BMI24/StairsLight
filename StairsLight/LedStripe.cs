@@ -17,9 +17,9 @@ namespace StairsLight
 
         public void SetColor(Color color)
         {
+            GreenController.SetBrightness(color.G / 255f);
             RedController.SetBrightness(color.R / 255f);
             BlueController.SetBrightness(color.B / 255f);
-            GreenController.SetBrightness(color.G / 255f);
         }
     }
 }
