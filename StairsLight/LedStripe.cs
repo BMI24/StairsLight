@@ -33,6 +33,7 @@ namespace StairsLight
             RedController = PinController.GetGpioController(redIndex);
             BlueController = PinController.GetGpioController(blueIndex);
             GreenController = PinController.GetGpioController(greenIndex);
+            ColorProvider = colorProvider;
             lock(ActiveStripes)
             {
                 ActiveStripes.Add(this);
