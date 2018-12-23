@@ -8,7 +8,7 @@ namespace StairsLight
 {
     class SoftwarePwmDriver : IPwmDriver
     {
-        const int PwmRange = 1024;
+        const int PwmRange = 100;
         GpioPin Pin;
         public SoftwarePwmDriver(GpioPin pin)
         {
