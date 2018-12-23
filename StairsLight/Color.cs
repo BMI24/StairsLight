@@ -8,7 +8,7 @@ namespace StairsLight
     {
         // ARGB, cherry-picked and altered from https://raw.githubusercontent.com/ManojLakshan/monogame/master/MonoGame.Framework/Graphics/Color.cs
 
-        private static Dictionary<string, Color> ColorsByName = GenerateColorsByName();
+        private static readonly Dictionary<string, Color> ColorsByName = GenerateColorsByName();
 
         private static Dictionary<string, Color> GenerateColorsByName()
         {
@@ -17,8 +17,11 @@ namespace StairsLight
             var props = typeof(Color).GetProperties();
 
             foreach (var p in props)
-                if (p.GetValue(TransparentBlack) is Color color)
-                    value.Add(p.Name.ToLower(), color);
+            {
+                var propValue = p.GetValue(TransparentBlack);
+                if (propValue is Color)
+                    value.Add(p.Name.ToLower(), (Color)propValue);
+            }
 
             return value;
         }

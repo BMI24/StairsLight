@@ -18,7 +18,8 @@ namespace StairsLight
 
             lock (ExistingControllers)
             {
-                if (!ExistingControllers.TryGetValue(bcmIndex, out PinController controller))
+                PinController controller;
+                if (!ExistingControllers.TryGetValue(bcmIndex, out controller))
                 {
                     controller = new PinController(bcmIndex);
                     ExistingControllers[bcmIndex] = controller;
