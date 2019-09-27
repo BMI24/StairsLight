@@ -14,8 +14,8 @@ namespace StairsLight
             Console.WriteLine("Hello World!");
 
             Stripes.Add(new LedStripe(16, 21, 20, new ConstantColorProvider(Color.Black)));
-            Stripes.Add(new LedStripe(13, 26, 19, new ConstantColorProvider(Color.Black)));
-            Stripes.Add(new LedStripe(6, 12, 5, new ConstantColorProvider(Color.Black)));
+            //Stripes.Add(new LedStripe(13, 26, 19, new ConstantColorProvider(Color.Black)));
+            //Stripes.Add(new LedStripe(6, 12, 5, new ConstantColorProvider(Color.Black)));
 
             MainAction();
 
