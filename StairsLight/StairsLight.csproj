@@ -74,10 +74,12 @@
     <Compile Include="ConstantColorProvider.cs" />
     <Compile Include="GradientColorProvider.cs" />
     <Compile Include="HardwarePwmDriver.cs" />
+    <Compile Include="I2CDeviceManager.cs" />
     <Compile Include="IColorProvider.cs" />
     <Compile Include="IPwmDriver.cs" />
     <Compile Include="LedStripe.cs" />
     <Compile Include="MathHelper.cs" />
+    <Compile Include="PcaPwmDriver.cs" />
     <Compile Include="PinController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
