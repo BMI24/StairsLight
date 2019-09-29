@@ -29,7 +29,16 @@ namespace StairsLight
             Console.ReadLine();
         }
 
-        static Color GenerateRandomColor() => new Color(RandomProvider.Next(256), RandomProvider.Next(256), RandomProvider.Next(256));
+        static Color GenerateRandomColor()
+        {
+            var random1 = RandomProvider.Next(256);
+            Console.WriteLine(random1);
+            var random2 = RandomProvider.Next(256);
+            Console.WriteLine(random2);
+            var random3 = RandomProvider.Next(256);
+            Console.WriteLine(random3);
+            return new Color(random1, random2, random3);
+        }
 
         static void MainAction()
         {
