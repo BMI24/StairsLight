@@ -8,7 +8,7 @@ using Unosquare.RaspberryIO.Gpio;
 
 namespace StairsLight
 {
-    class PinController
+    class PinController : IColorController
     {
         private static Dictionary<int, PinController> ExistingControllers = new Dictionary<int, PinController>();
         public static PinController GetGpioController(int bcmIndex)

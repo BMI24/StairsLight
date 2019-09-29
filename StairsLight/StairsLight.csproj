@@ -74,7 +74,10 @@
     <Compile Include="ConstantColorProvider.cs" />
     <Compile Include="GradientColorProvider.cs" />
     <Compile Include="HardwarePwmDriver.cs" />
-    <Compile Include="I2CDeviceManager.cs" />
+    <Compile Include="IColorController.cs" />
+    <Compile Include="PCA9685ChannelController.cs" />
+    <Compile Include="PCA9685Device.cs" />
+    <Compile Include="PCA9685Manager.cs" />
     <Compile Include="IColorProvider.cs" />
     <Compile Include="IPwmDriver.cs" />
     <Compile Include="LedStripe.cs" />

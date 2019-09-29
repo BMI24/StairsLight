@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unosquare.RaspberryIO.Gpio;
 
 namespace StairsLight
 {
@@ -13,9 +14,13 @@ namespace StairsLight
         {
             Console.WriteLine("Hello World!");
 
-            Stripes.Add(new LedStripe(16, 21, 20, new ConstantColorProvider(Color.Black)));
-            //Stripes.Add(new LedStripe(13, 26, 19, new ConstantColorProvider(Color.Black)));
-            //Stripes.Add(new LedStripe(6, 12, 5, new ConstantColorProvider(Color.Black)));
+            var testDevice = PCA9685Manager.GetDevice(0x43);
+
+            for (int i = 1; i < 16; i+=3)
+            {
+                Stripes.Add(new LedStripe(testDevice.GetChannelController(i), testDevice.GetChannelController(i + 1)
+                    , testDevice.GetChannelController(i + 2), new ConstantColorProvider(Color.Black)));
+            }
 
             MainAction();
 

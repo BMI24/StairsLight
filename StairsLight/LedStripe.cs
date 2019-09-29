@@ -24,15 +24,15 @@ namespace StairsLight
             }
         }
 
-        PinController RedController, BlueController, GreenController;
+        IColorController RedController, BlueController, GreenController;
 
         public IColorProvider ColorProvider;
 
-        public LedStripe(int redIndex, int blueIndex, int greenIndex, IColorProvider colorProvider)
+        public LedStripe(IColorController redController, IColorController blueController, IColorController greenController, IColorProvider colorProvider)
         {
-            RedController = PinController.GetGpioController(redIndex);
-            BlueController = PinController.GetGpioController(blueIndex);
-            GreenController = PinController.GetGpioController(greenIndex);
+            RedController = redController;
+            BlueController = blueController;
+            GreenController = greenController;
             ColorProvider = colorProvider;
             lock(ActiveStripes)
             {
