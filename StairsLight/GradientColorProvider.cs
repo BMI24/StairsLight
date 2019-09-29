@@ -8,7 +8,7 @@ namespace StairsLight
 {
     class GradientColorProvider : IColorProvider
     {
-        const float Step = 0.025f;
+        const float Step = 0.0025f;
 
         float CurrentStep = 0f;
         int Direction = 1;

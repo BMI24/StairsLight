@@ -10,7 +10,7 @@ namespace StairsLight
         private static List<LedStripe> ActiveStripes = new List<LedStripe>();
         static LedStripe()
         {
-            Timer colorUpdateTimer = new Timer(UpdateColor, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1f / 10));
+            Timer colorUpdateTimer = new Timer(UpdateColor, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1f / 100));
         }
 
         private static void UpdateColor(object state)
