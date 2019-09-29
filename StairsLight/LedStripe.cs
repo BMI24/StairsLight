@@ -8,11 +8,10 @@ namespace StairsLight
     class LedStripe
     {
         private static List<LedStripe> ActiveStripes = new List<LedStripe>();
-        private static int Count = 0;
+
         static LedStripe()
         {
-            Timer colorUpdateTimer = new Timer(UpdateColor, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1f / 100));
-            Timer colorUpdateFrequencyChecker = new Timer(PrintUpdateColorFrequency, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10));
+            Timer colorUpdateTimer = new Timer(UpdateColor, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1f / 10));
         }
 
         private static void UpdateColor(object state)
@@ -24,13 +23,6 @@ namespace StairsLight
                     stripe.SetColor(stripe.ColorProvider.NextTickColor);
                 }
             }
-            Count++;
-        }
-
-        private static void PrintUpdateColorFrequency(object state)
-        {
-            Console.WriteLine(Count);
-            Count = 0;
         }
 
         IColorController RedController, BlueController, GreenController;
