@@ -25,11 +25,11 @@ namespace StairsLight
         {
             get
             {
-                CurrentStep += Step;
+                CurrentStep += Step * Direction;
                 if (CurrentStep > 1 || CurrentStep < 0)
                 {
                     Direction *= -1;
-                    CurrentStep += Step;
+                    CurrentStep += Step * Direction;
                 }
                 return Color.Lerp(Color1, Color2, CurrentStep);
             }
