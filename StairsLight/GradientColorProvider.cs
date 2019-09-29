@@ -8,9 +8,10 @@ namespace StairsLight
 {
     class GradientColorProvider : IColorProvider
     {
-        const float Step = 0.05f;
+        const float Step = 0.025f;
 
         float CurrentStep = 0f;
+        int Direction = 1;
 
         Color Color1, Color2;
 
@@ -25,8 +26,11 @@ namespace StairsLight
             get
             {
                 CurrentStep += Step;
-                if (CurrentStep > 1)
-                    CurrentStep = 0;
+                if (CurrentStep > 1 || CurrentStep < 0)
+                {
+                    Direction *= -1;
+                    CurrentStep += Step;
+                }
                 return Color.Lerp(Color1, Color2, CurrentStep);
             }
         }
