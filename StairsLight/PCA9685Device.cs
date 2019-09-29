@@ -50,7 +50,7 @@ namespace StairsLight
                 throw new ArgumentException($"{nameof(pulseStart)}={pulseStart} must be less than {nameof(PwmResolution)}={PwmResolution})");
             if (pulseEnd >= PwmResolution)
                 throw new ArgumentException($"{nameof(pulseEnd)}={pulseEnd} must be less than {nameof(PwmResolution)}={PwmResolution})");
-            if (pulseStart < pulseEnd)
+            if (pulseStart > pulseEnd)
                 throw new ArgumentException($"{nameof(pulseStart)}={pulseStart} must be less than {nameof(pulseEnd)}={pulseEnd})");
             if (ledIndex >= LedCount)
                 throw new ArgumentException($"{nameof(ledIndex)}={ledIndex} must be less than {nameof(LedCount)}={LedCount})");
