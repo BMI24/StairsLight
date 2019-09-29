@@ -10,7 +10,7 @@ namespace StairsLight
 {
     static class PCA9685Manager
     {
-        private static PCA9685Device[] PCA9685Devices = new PCA9685Device[50];
+        private static PCA9685Device[] PCA9685Devices = new PCA9685Device[200];
 
         public static PCA9685Device GetDevice(int i2cAddress)
         {
