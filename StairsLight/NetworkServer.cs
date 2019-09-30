@@ -45,6 +45,7 @@ namespace StairsLight
             var color = LedStripe.ActiveStripesReadOnly[ledStripeIndex].ColorProvider.NextTickColor;
             SendData(new FluentWriter()
                 .WriteEnum(Protocol.GetColor)
+                .WriteInt(ledStripeIndex)
                 .WriteByte(color.R)
                 .WriteByte(color.G)
                 .WriteByte(color.B)
