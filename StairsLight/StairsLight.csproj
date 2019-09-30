@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>6</LangVersion>
+    <LangVersion>7.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -75,6 +76,8 @@
     <Compile Include="GradientColorProvider.cs" />
     <Compile Include="HardwarePwmDriver.cs" />
     <Compile Include="IColorController.cs" />
+    <Compile Include="Listener.cs" />
+    <Compile Include="NetworkServer.cs" />
     <Compile Include="PCA9685ChannelController.cs" />
     <Compile Include="PCA9685Device.cs" />
     <Compile Include="PCA9685Manager.cs" />
@@ -98,6 +101,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StairsLight.Networking\StairsLight.Networking.csproj">
+      <Project>{8e5f7c72-0c66-4b03-a47d-6a14847762de}</Project>
+      <Name>StairsLight.Networking</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

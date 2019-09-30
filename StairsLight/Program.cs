@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Unosquare.RaspberryIO.Gpio;
@@ -22,6 +23,9 @@ namespace StairsLight
                 Stripes.Add(new LedStripe(testDevice.GetChannelController(i), testDevice.GetChannelController(i + 1)
                     , testDevice.GetChannelController(i + 2), new ConstantColorProvider(Color.Black)));
             }
+
+            Listener listener = new Listener(NetworkServer.ApplicationPort, IPAddress.Any);
+            listener.StartListening();
 
             MainAction();
 

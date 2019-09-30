@@ -9,6 +9,8 @@ namespace StairsLight
     {
         private static List<LedStripe> ActiveStripes = new List<LedStripe>();
 
+        public static IReadOnlyList<LedStripe> ActiveStripesReadOnly => ActiveStripes.AsReadOnly();
+
         static LedStripe()
         {
             Timer colorUpdateTimer = new Timer(UpdateColor, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1f / 10));
