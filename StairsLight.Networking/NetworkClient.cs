@@ -144,16 +144,23 @@ namespace StairsLight.Networking
                 lock (NetworkStream)
                     NetworkStream.BeginWrite(messageWithWrapper, 0, messageWithWrapper.Length, new AsyncCallback(DataWritten), null);
             }
-            catch (Exception e) when (e is ArgumentNullException || e is IOException)
+            catch (Exception e) when (e is ArgumentNullException || e is IOException || e is SocketException)
             {
                 Kill();
             }
         }
 
-        private void DataWritten(IAsyncResult e)
+        private void DataWritten(IAsyncResult result)
         {
-            lock (NetworkStream)
-                NetworkStream.EndWrite(e);
+            try
+            {
+                lock (NetworkStream)
+                    NetworkStream.EndWrite(result);
+            }
+            catch (Exception e) when (e is ArgumentNullException || e is IOException || e is SocketException)
+            {
+                Kill();
+            }
         }
 
         void StartListening()
