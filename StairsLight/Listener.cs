@@ -30,6 +30,7 @@ namespace StairsLight
                 if (client == null) continue;
                 client.NoDelay = true;
                 Console.WriteLine($"Client mit IP {client.Client.RemoteEndPoint} verbunden");
+                new NetworkServer(client);
             }
         }
 
