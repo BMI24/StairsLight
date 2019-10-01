@@ -31,7 +31,7 @@ namespace StairsLight
 
         public IColorProvider ColorProvider;
 
-        public LedStripe(IColorController redController, IColorController blueController, IColorController greenController, IColorProvider colorProvider)
+        public LedStripe(IColorController redController, IColorController greenController, IColorController blueController, IColorProvider colorProvider)
         {
             RedController = redController;
             BlueController = blueController;
