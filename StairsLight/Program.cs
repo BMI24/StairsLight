@@ -22,8 +22,8 @@ namespace StairsLight
 
             for (int i = 0; i < 16; i++)
             {
-                Stripes.Add(new LedStripe(redController.GetChannelController(i), greenController.GetChannelController(i)
-                    , blueController.GetChannelController(i), new ConstantColorProvider(Color.White)));
+                Stripes.Add(new LedStripe(redController.GetChannelController(i), redController.GetChannelController(i)
+                    , redController.GetChannelController(i), new ConstantColorProvider(Color.White)));
             }
 
             Listener listener = new Listener(NetworkServer.ApplicationPort, IPAddress.Any);
