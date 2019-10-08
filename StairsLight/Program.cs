@@ -16,6 +16,8 @@ namespace StairsLight
         {
             Console.WriteLine("Hello World!");
 
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             var redController = PCA9685Manager.GetDevice(0x41);
             //var blueController = PCA9685Manager.GetDevice(0x42);
             //var greenController = PCA9685Manager.GetDevice(0x43);
@@ -26,10 +28,10 @@ namespace StairsLight
                     , redController.GetChannelController(i), new ConstantColorProvider(Color.White)));
             }
 
+
             Listener listener = new Listener(NetworkServer.ApplicationPort, IPAddress.Any);
             listener.StartListening();
 
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             try
             {
                 MainAction();
