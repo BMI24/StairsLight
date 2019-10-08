@@ -16,12 +16,14 @@ namespace StairsLight
         {
             Console.WriteLine("Hello World!");
 
-            var testDevice = PCA9685Manager.GetDevice(0x43);
+            var redController = PCA9685Manager.GetDevice(0x41);
+            var blueController = PCA9685Manager.GetDevice(0x42);
+            var greenController = PCA9685Manager.GetDevice(0x43);
 
-            for (int i = 1; i < 16; i+=3)
+            for (int i = 0; i < 16; i++)
             {
-                Stripes.Add(new LedStripe(testDevice.GetChannelController(i), testDevice.GetChannelController(i + 1)
-                    , testDevice.GetChannelController(i + 2), new ConstantColorProvider(Color.Black)));
+                Stripes.Add(new LedStripe(redController.GetChannelController(i), greenController.GetChannelController(i)
+                    , blueController.GetChannelController(i), new ConstantColorProvider(Color.White)));
             }
 
             Listener listener = new Listener(NetworkServer.ApplicationPort, IPAddress.Any);
