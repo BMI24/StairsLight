@@ -29,6 +29,7 @@ namespace StairsLight
             Listener listener = new Listener(NetworkServer.ApplicationPort, IPAddress.Any);
             listener.StartListening();
 
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             try
             {
                 MainAction();
@@ -41,6 +42,11 @@ namespace StairsLight
 
             Console.WriteLine("Closing demo..");
             Console.ReadLine();
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine(((Exception)e.ExceptionObject).StackTrace);
         }
 
         static Color GenerateRandomColor() => new Color((byte)RandomProvider.Next(256), (byte)RandomProvider.Next(256), (byte)RandomProvider.Next(256));
