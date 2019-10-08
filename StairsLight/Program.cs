@@ -29,7 +29,15 @@ namespace StairsLight
             Listener listener = new Listener(NetworkServer.ApplicationPort, IPAddress.Any);
             listener.StartListening();
 
-            MainAction();
+            try
+            {
+                MainAction();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
 
             Console.WriteLine("Closing demo..");
             Console.ReadLine();
