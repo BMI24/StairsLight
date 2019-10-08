@@ -24,8 +24,8 @@ namespace StairsLight
 
             for (int i = 0; i < 15; i++)
             {
-                Stripes.Add(new LedStripe(redController.GetChannelController(i), redController.GetChannelController(i)
-                    , redController.GetChannelController(i), new ConstantColorProvider(Color.Black)));
+                Stripes.Add(new LedStripe(redController.GetChannelController(i), new MockColorController()
+                    , new MockColorController(), new ConstantColorProvider(Color.Black)));
             }
 
 
