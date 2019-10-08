@@ -55,7 +55,7 @@ namespace StairsLight
             if (ledIndex >= LedCount)
                 throw new ArgumentException($"{nameof(ledIndex)}={ledIndex} must be less than {nameof(LedCount)}={LedCount})");
 
-            Console.WriteLine($"{ledIndex} {pulseStart} {pulseEnd} {PCA9685_LED0_ADDRESS + 4 * ledIndex}");
+            //Console.WriteLine($"{ledIndex} {pulseStart} {pulseEnd} {PCA9685_LED0_ADDRESS + 4 * ledIndex}");
             Device.WriteAddressByte(PCA9685_LED0_ADDRESS + 4 * ledIndex, (byte)(pulseStart & 0xFF));
             Device.WriteAddressByte(PCA9685_LED0_ADDRESS + 1 + 4 * ledIndex, (byte)(pulseStart >> 8));
             Device.WriteAddressByte(PCA9685_LED0_ADDRESS + 2 + 4 * ledIndex, (byte)(pulseEnd & 0xFF));
