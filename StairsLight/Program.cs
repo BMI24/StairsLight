@@ -17,8 +17,8 @@ namespace StairsLight
             Console.WriteLine("Hello World!");
 
             var redController = PCA9685Manager.GetDevice(0x41);
-            var blueController = PCA9685Manager.GetDevice(0x42);
-            var greenController = PCA9685Manager.GetDevice(0x43);
+            //var blueController = PCA9685Manager.GetDevice(0x42);
+            //var greenController = PCA9685Manager.GetDevice(0x43);
 
             for (int i = 0; i < 16; i++)
             {
