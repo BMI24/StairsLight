@@ -11,40 +11,25 @@ namespace StairsLight
 
         public static IReadOnlyList<LedStripe> ActiveStripesReadOnly => ActiveStripes.AsReadOnly();
 
-        static LedStripe()
-        {
-            Timer colorUpdateTimer = new Timer(UpdateColor, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1f / 10));
-        }
-
-        private static void UpdateColor(object state)
-        {
-            lock(ActiveStripes)
-            {
-                foreach(var stripe in ActiveStripes)
-                {
-                    stripe.SetColor(stripe.ColorProvider.NextTickColor);
-                }
-            }
-        }
-
         IColorController RedController, BlueController, GreenController;
 
-        public IColorProvider ColorProvider;
+        public Color Color { get; private set; }
 
-        public LedStripe(IColorController redController, IColorController greenController, IColorController blueController, IColorProvider colorProvider)
+        public LedStripe(IColorController redController, IColorController greenController, IColorController blueController, Color color)
         {
             RedController = redController;
             BlueController = blueController;
             GreenController = greenController;
-            ColorProvider = colorProvider;
             lock(ActiveStripes)
             {
                 ActiveStripes.Add(this);
             }
+            SetColor(color);
         }
 
         public void SetColor(Color color)
         {
+            Color = color;
             GreenController.SetBrightness(color.G / 255f);
             RedController.SetBrightness(color.R / 255f);
             BlueController.SetBrightness(color.B / 255f);

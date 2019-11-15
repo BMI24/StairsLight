@@ -28,7 +28,7 @@ namespace StairsLight
                 .ReadByte(out byte r)
                 .ReadByte(out byte g)
                 .ReadByte(out byte b);
-            LedStripe.ActiveStripesReadOnly[ledStripeIndex].ColorProvider = new ConstantColorProvider(new Color(r, g, b));
+            LedStripe.ActiveStripesReadOnly[ledStripeIndex].SetColor(new Color(r, g, b));
         }
 
         private void ProcessGetStripeCount(byte[] b)
@@ -42,7 +42,7 @@ namespace StairsLight
         {
             new FluentReader(b)
                 .ReadInt(out int ledStripeIndex);
-            var color = LedStripe.ActiveStripesReadOnly[ledStripeIndex].ColorProvider.NextTickColor;
+            var color = LedStripe.ActiveStripesReadOnly[ledStripeIndex].Color;
             SendData(new FluentWriter()
                 .WriteEnum(Protocol.GetColor)
                 .WriteInt(ledStripeIndex)
