@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unosquare.RaspberryIO.Gpio;
+using Unosquare.RaspberryIO.Native;
 
 namespace StairsLight
 {
@@ -57,10 +58,24 @@ namespace StairsLight
             lock (Device)
             {
                 //Console.WriteLine($"{ledIndex} {pulseStart} {pulseEnd} {PCA9685_LED0_ADDRESS + 4 * ledIndex}");
-                Device.WriteAddressByte(PCA9685_LED0_ADDRESS + 4 * ledIndex, (byte)(pulseStart & 0xFF));
-                Device.WriteAddressByte(PCA9685_LED0_ADDRESS + 1 + 4 * ledIndex, (byte)(pulseStart >> 8));
-                Device.WriteAddressByte(PCA9685_LED0_ADDRESS + 2 + 4 * ledIndex, (byte)(pulseEnd & 0xFF));
-                Device.WriteAddressByte(PCA9685_LED0_ADDRESS + 3 + 4 * ledIndex, (byte)(pulseEnd >> 8));
+                WriteAddressByte(PCA9685_LED0_ADDRESS + 4 * ledIndex, (byte)(pulseStart & 0xFF));
+                WriteAddressByte(PCA9685_LED0_ADDRESS + 1 + 4 * ledIndex, (byte)(pulseStart >> 8));
+                WriteAddressByte(PCA9685_LED0_ADDRESS + 2 + 4 * ledIndex, (byte)(pulseEnd & 0xFF));
+                WriteAddressByte(PCA9685_LED0_ADDRESS + 3 + 4 * ledIndex, (byte)(pulseEnd >> 8));
+            }
+        }
+
+        void WriteAddressByte(int address, byte data, int maxRetryCount = 5)
+        {
+            bool success = false;
+            for (int i = 0; i < maxRetryCount && !success; i++)
+            {
+                try
+                {
+                    Device.WriteAddressByte(address, data);
+                    success = true;
+                }
+                catch (HardwareException e) when (e.ErrorCode == 121) { }
             }
         }
 
