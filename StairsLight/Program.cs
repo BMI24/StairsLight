@@ -18,14 +18,14 @@ namespace StairsLight
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            var redController = PCA9685Manager.GetDevice(0x43);
-            //var blueController = PCA9685Manager.GetDevice(0x42);
-            //var greenController = PCA9685Manager.GetDevice(0x43);
+            var redController = PCA9685Manager.GetDevice(0x41);
+            var blueController = PCA9685Manager.GetDevice(0x42);
+            var greenController = PCA9685Manager.GetDevice(0x43);
 
             for (int i = 0; i < 15; i++)
             {
-                Stripes.Add(new LedStripe(redController.GetChannelController(i), new MockColorController()
-                    , new MockColorController(), Color.Black));
+                Stripes.Add(new LedStripe(redController.GetChannelController(i), greenController.GetChannelController(i)
+                    , blueController.GetChannelController(i), Color.Black));
             }
 
 
