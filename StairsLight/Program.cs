@@ -27,7 +27,7 @@ namespace StairsLight
             {
                 //blue indexes are inverted
                 Stripes.Add(new LedStripe(redController.GetChannelController(i), greenController.GetChannelController(i)
-                    , blueController.GetChannelController(StairsStepCount - i), Color.Black));
+                    , blueController.GetChannelController(StairsStepCount - 1 - i), Color.Black));
             }
 
 
