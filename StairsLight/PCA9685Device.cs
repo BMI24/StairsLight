@@ -65,7 +65,7 @@ namespace StairsLight
             }
         }
 
-        void WriteAddressByte(int address, byte data, int maxRetryCount = 5)
+        void WriteAddressByte(int address, byte data, int maxRetryCount = 15)
         {
             bool success = false;
             for (int i = 0; i < maxRetryCount && !success; i++)
