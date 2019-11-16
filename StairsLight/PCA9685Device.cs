@@ -77,6 +77,7 @@ namespace StairsLight
                 }
                 catch (HardwareException e) when (e.ErrorCode == 121)
                 {
+                    Console.WriteLine("Failed write");
                     if (i == maxRetryCount - 1)
                         throw;
                 }
