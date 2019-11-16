@@ -75,7 +75,11 @@ namespace StairsLight
                     Device.WriteAddressByte(address, data);
                     success = true;
                 }
-                catch (HardwareException e) when (e.ErrorCode == 121) { }
+                catch (HardwareException e) when (e.ErrorCode == 121)
+                {
+                    if (i == maxRetryCount - 1)
+                        throw;
+                }
             }
         }
 
