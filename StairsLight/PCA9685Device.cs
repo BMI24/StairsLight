@@ -25,15 +25,15 @@ namespace StairsLight
         public PCA9685Device(I2CDevice device)
         {
             Device = device;
-            device.WriteAddressByte(PCA9685_MODE1_ADDRESS, 0x30);
-            device.WriteAddressByte(PCA9685_MODE2_ADDRESS, 0x04);
+            WriteAddressByte(PCA9685_MODE1_ADDRESS, 0x30);
+            WriteAddressByte(PCA9685_MODE2_ADDRESS, 0x04);
             SetFrequency(Frequency);
-            device.WriteAddressByte(PCA9685_MODE1_ADDRESS, 0x00);
+            WriteAddressByte(PCA9685_MODE1_ADDRESS, 0x00);
         }
 
         private void SetFrequency(int frequency)
         {
-            Device.WriteAddressByte(PCA9685_PRESCALE_ADDRESS, CalculatePrescale(frequency));
+            WriteAddressByte(PCA9685_PRESCALE_ADDRESS, CalculatePrescale(frequency));
         }
 
         private static byte CalculatePrescale(int frequency) => (byte)((25000000 / (4096 * frequency)) - 1);
