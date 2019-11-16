@@ -65,7 +65,7 @@ namespace StairsLight
             }
         }
 
-        void WriteAddressByte(int address, byte data, int maxRetryCount = 15)
+        void WriteAddressByte(int address, byte data, int maxRetryCount = 150)
         {
             bool success = false;
             for (int i = 0; i < maxRetryCount && !success; i++)
@@ -77,7 +77,6 @@ namespace StairsLight
                 }
                 catch (HardwareException e) when (e.ErrorCode == 121)
                 {
-                    Console.WriteLine("Failed write");
                     if (i == maxRetryCount - 1)
                         throw;
                 }
