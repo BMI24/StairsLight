@@ -22,11 +22,12 @@ namespace StairsLight
             var blueController = PCA9685Manager.GetDevice(0x43);
             var greenController = PCA9685Manager.GetDevice(0x41);
 
-            for (int i = 0; i < 15; i++)
+            const int StairsStepCount = 16;
+            for (int i = 0; i < StairsStepCount; i++)
             {
                 //blue indexes are inverted
                 Stripes.Add(new LedStripe(redController.GetChannelController(i), greenController.GetChannelController(i)
-                    , blueController.GetChannelController(15 - i), Color.Black));
+                    , blueController.GetChannelController(StairsStepCount - i), Color.Black));
             }
 
 
