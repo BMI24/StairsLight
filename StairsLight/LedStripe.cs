@@ -32,7 +32,7 @@ namespace StairsLight
             {
                 lock (ActiveStripesLock)
                 {
-                    _brightness = Brightness;
+                    _brightness = value;
                     foreach (var stripe in ActiveStripes)
                     {
                         stripe.RefreshShownColor();
@@ -65,7 +65,6 @@ namespace StairsLight
 
         private void RefreshShownColor()
         {
-            Console.WriteLine($"r:{Color.R} br:{Brightness}");
             GreenController.SetBrightness(Color.G / 255f * Brightness);
             RedController.SetBrightness(Color.R / 255f * Brightness);
             BlueController.SetBrightness(Color.B / 255f * Brightness);
