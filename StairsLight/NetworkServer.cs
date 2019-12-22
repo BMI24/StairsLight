@@ -33,7 +33,7 @@ namespace StairsLight
         private void ProcessGetBrightness(byte[] b)
         {
             SendData(new FluentWriter()
-                .WriteEnum(Protocol.GetColor)
+                .WriteEnum(Protocol.GetBrightness)
                 .WriteSingle(LedStripe.Brightness)
                 .ToByteArray());
         }
