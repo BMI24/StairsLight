@@ -7,9 +7,39 @@ namespace StairsLight
 {
     class LedStripe
     {
+        public static object ActiveStripesLock { get; } = new object();
         private static List<LedStripe> ActiveStripes = new List<LedStripe>();
 
         public static IReadOnlyList<LedStripe> ActiveStripesReadOnly => ActiveStripes.AsReadOnly();
+
+        private static float _brightness;
+
+        static LedStripe()
+        {
+            Brightness = 1;
+        }
+
+        public static float Brightness
+        {
+            get
+            {
+                lock (ActiveStripesLock)
+                {
+                    return _brightness;
+                }
+            }
+            set
+            {
+                lock (ActiveStripesLock)
+                {
+                    _brightness = Brightness;
+                    foreach (var stripe in ActiveStripes)
+                    {
+                        stripe.RefreshShownColor();
+                    }
+                }
+            }
+        }
 
         IColorController RedController, BlueController, GreenController;
 
@@ -20,7 +50,7 @@ namespace StairsLight
             RedController = redController;
             BlueController = blueController;
             GreenController = greenController;
-            lock(ActiveStripes)
+            lock(ActiveStripesLock)
             {
                 ActiveStripes.Add(this);
             }
@@ -30,9 +60,14 @@ namespace StairsLight
         public void SetColor(Color color)
         {
             Color = color;
-            GreenController.SetBrightness(color.G / 255f);
-            RedController.SetBrightness(color.R / 255f);
-            BlueController.SetBrightness(color.B / 255f);
+            RefreshShownColor();
+        }
+
+        private void RefreshShownColor()
+        {
+            GreenController.SetBrightness(Color.G / 255f * Brightness);
+            RedController.SetBrightness(Color.R / 255f * Brightness);
+            BlueController.SetBrightness(Color.B / 255f * Brightness);
         }
     }
 }

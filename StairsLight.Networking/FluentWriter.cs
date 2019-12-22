@@ -72,6 +72,12 @@ namespace StairsLight.Networking
             return this;
         }
 
+        public FluentWriter WriteSingle(float input)
+        {
+            ByteList.AddRange(BitConverter.GetBytes(input));
+            return this;
+        }
+
         public static byte[] ToUTF8(object o) => Encoding.UTF8.GetBytes(o.ToString() + '\0');
     }
 }

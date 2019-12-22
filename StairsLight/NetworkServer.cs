@@ -16,9 +16,26 @@ namespace StairsLight
             {
                 { Protocol.GetColor, ProcessGetColor },
                 { Protocol.GetStripeCount, ProcessGetStripeCount },
-                { Protocol.SetColor, ProcessSetColor }
+                { Protocol.SetColor, ProcessSetColor },
+                { Protocol.GetBrightness, ProcessGetBrightness },
+                { Protocol.SetBrightness, ProcessSetBrightness }
             };
             MessageRecieved += ProcessMessage;
+        }
+
+        private void ProcessSetBrightness(byte[] b)
+        {
+            new FluentReader(b)
+                .ReadSingle(out float brightness);
+            LedStripe.Brightness = brightness;
+        }
+
+        private void ProcessGetBrightness(byte[] b)
+        {
+            SendData(new FluentWriter()
+                .WriteEnum(Protocol.GetColor)
+                .WriteSingle(LedStripe.Brightness)
+                .ToByteArray());
         }
 
         private void ProcessSetColor(byte[] content)
@@ -52,8 +69,6 @@ namespace StairsLight
                 .ToByteArray());
         }
         
-
-
         protected void ProcessMessage(object sender, NetworkMessage args)
         {
             if (RecieveReaction.TryGetValue(args.Header, out Action<byte[]> reaction))
@@ -68,6 +83,7 @@ namespace StairsLight
                 }
             }
         }
+
         readonly Dictionary<Protocol, Action<byte[]>> RecieveReaction;
     }
 }

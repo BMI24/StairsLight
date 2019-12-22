@@ -25,7 +25,7 @@ namespace StairsLight
             const int StairsStepCount = 16;
             for (int i = 0; i < StairsStepCount; i++)
             {
-                //blue indexes are inverted
+                //blue indices are inverted because of weird physical installation
                 Stripes.Add(new LedStripe(redController.GetChannelController(i), greenController.GetChannelController(i)
                     , blueController.GetChannelController(StairsStepCount - 1 - i), Color.Black));
             }
@@ -65,12 +65,12 @@ namespace StairsLight
                     if (colorInput == "exit")
                         return;
                     var colorInputSplit = colorInput.Split(',');
-                    string color1Name = colorInputSplit[0];
-                    //string color2Name = colorInputSplit[1];
+                    string colorName = colorInputSplit[0];
                     float brightness = Convert.ToSingle(colorInputSplit[1]);
-                    var color1 = (color1Name == "random" ? GenerateRandomColor() : Color.GetColor(color1Name)) * brightness;
-                    //var color2 = (color2Name == "random" ? GenerateRandomColor() : Color.GetColor(color2Name)) * brightness;
-                    stripe.SetColor(color1);
+                    var color = (colorName == "random" ? GenerateRandomColor() : Color.GetColor(colorName)) * brightness;
+                    stripe.SetColor(color);
+                    if (colorInputSplit.Length > 2)
+                        LedStripe.Brightness = Convert.ToSingle(colorInputSplit[2]);
                 }
             }
         }

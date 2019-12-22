@@ -157,6 +157,20 @@ namespace StairsLight.Networking
             }
         }
 
+        public FluentReader ReadSingle(out float output)
+        {
+            try
+            {
+                output = BitConverter.ToSingle(Array, Index);
+                Index += 4;
+                return this;
+            }
+            catch (Exception e)
+            {
+                throw new ParsingException(e);
+            }
+        }
+
         public byte[] ReadToEnd()
         {
             try

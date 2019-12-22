@@ -11,6 +11,8 @@ namespace StairsLight.Networking
         KeepAlive = 1,
         GetStripeCount = 2,
         GetColor = 3,
-        SetColor = 4
+        SetColor = 4,
+        GetBrightness = 5,
+        SetBrightness = 6
     }
 }
