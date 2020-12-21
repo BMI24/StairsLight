@@ -13,6 +13,8 @@ namespace StairsLight.Networking
         GetColor = 3,
         SetColor = 4,
         GetBrightness = 5,
-        SetBrightness = 6
+        SetBrightness = 6,
+        GetOperationMode = 7,
+        SetOperationMode = 8
     }
 }

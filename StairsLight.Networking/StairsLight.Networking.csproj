@@ -46,6 +46,7 @@
     <Compile Include="FluentWriter.cs" />
     <Compile Include="NetworkClient.cs" />
     <Compile Include="NetworkMessage.cs" />
+    <Compile Include="OperationMode.cs" />
     <Compile Include="ParsingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol.cs" />
