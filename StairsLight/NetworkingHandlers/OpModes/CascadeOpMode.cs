@@ -95,7 +95,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
             message.RespondWith(
                 writerFunc(new FluentWriter()
                 .WriteEnum(Protocol.OperationModeSpecific)
-                .WriteEnum(OperationModeIdentifier.Individual)));
+                .WriteEnum(OperationModeIdentifier.Cascade)));
         }
 
         bool _active;
