@@ -33,7 +33,7 @@ namespace StairsLight.NetworkingHandlers
         Dictionary<OperationModeIdentifier, IOpMode> IdentifierToOpMode;
 
         static IOpMode _currentOpMode;
-
+        static object CurrentOpModeLock = new object();
         static IOpMode CurrentOpMode
         {
             get
@@ -42,7 +42,7 @@ namespace StairsLight.NetworkingHandlers
             }
             set
             {
-                lock (_currentOpMode)
+                lock (CurrentOpModeLock)
                 {
                     _currentOpMode.Active = false;
                     (_currentOpMode = value).Active = true;
