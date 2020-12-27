@@ -17,8 +17,8 @@ namespace StairsLight.NetworkingHandlers
 
         private void ProcessMessage(object sender, NetworkMessage e)
         {
-            if (e.Content == null)
-                Console.WriteLine("Content is null");
+            if (e == null)
+                Console.WriteLine("e is null");
             try
             {
                 ServerManager.Server.ProcessMessage(new MessageInfo(new FluentReader(e.Content), this, e.Header));
