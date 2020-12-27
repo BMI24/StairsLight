@@ -19,19 +19,11 @@ namespace StairsLight.NetworkingHandlers
         {
             try
             {
-                if (e.Content == null)
-                    Console.WriteLine("e is null");
                 ServerManager.Server.ProcessMessage(new MessageInfo(new FluentReader(e.Content), this, e.Header));
             }
             catch (ParsingException)
             {
                 Kill();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                Console.WriteLine(ex.Source);
             }
         }
     }

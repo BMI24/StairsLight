@@ -33,7 +33,7 @@ namespace StairsLight
                     , blueController.GetChannelController(StairsStepCount - 1 - i), Color.Black));
             }
 
-
+            ServerManager.Server = new OperationModeManager();
             Listener listener = new Listener(NetworkClient.ApplicationPort, IPAddress.Any);
             listener.StartListening();
 
