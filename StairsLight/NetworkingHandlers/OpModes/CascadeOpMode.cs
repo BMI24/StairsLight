@@ -33,6 +33,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 { CascadeOperationModeProtocol.SetCascade, ProcessSetCascade },
                 { CascadeOperationModeProtocol.SetSpeed, ProcessSetSpeed }
             };
+            ActiveCascade = new List<CascadePart>();
             UpdateCascadeTimer = new Timer(UpdateCascade, null, Timeout.Infinite, Timeout.Infinite);
         }
 
@@ -126,13 +127,9 @@ namespace StairsLight.NetworkingHandlers.OpModes
         private void Activate()
         {
             UpdateCascadeTimer.Change(UpdateCascadeTimerFrequency, UpdateCascadeTimerFrequency);
-            if (ActiveCascade == null)
+            foreach (var stripe in LedStripe.ActiveStripesReadOnly)
             {
-                foreach (var stripe in LedStripe.ActiveStripesReadOnly)
-                {
-                    stripe.SetColor(Color.Black);
-                }
-                return;
+                stripe.SetColor(Color.Black);
             }
             StepChangeSteps = StepsCount + ActiveCascade.Sum(c => c.Width) - 1;
             CurrentOffset = 0;
@@ -159,7 +156,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
         float CurrentOffset;
         void UpdateCascade(object state)
         {
-            if (!_active || ActiveCascade == null)
+            if (!_active)
                 return;
 
             CurrentOffset += SpeedToIncrementMultiplier * Speed;
