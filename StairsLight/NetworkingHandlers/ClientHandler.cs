@@ -31,6 +31,7 @@ namespace StairsLight.NetworkingHandlers
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(ex.Source);
             }
         }
     }
