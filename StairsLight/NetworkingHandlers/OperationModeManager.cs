@@ -89,8 +89,6 @@ namespace StairsLight.NetworkingHandlers
             {
                 reaction(message);
             }
-            else
-                throw new ParsingException(null);
         }
     }
 }
