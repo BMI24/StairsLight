@@ -44,7 +44,8 @@ namespace StairsLight.NetworkingHandlers
             {
                 lock (CurrentOpModeLock)
                 {
-                    _currentOpMode.Active = false;
+                    if (_currentOpMode != null)
+                        _currentOpMode.Active = false;
                     (_currentOpMode = value).Active = true;
                 }
             }
