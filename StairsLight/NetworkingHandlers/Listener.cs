@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StairsLight
+namespace StairsLight.NetworkingHandlers
 {
     class Listener
     {
@@ -30,14 +30,14 @@ namespace StairsLight
                 if (client == null) continue;
                 client.NoDelay = true;
                 Console.WriteLine($"Client mit IP {client.Client.RemoteEndPoint} verbunden");
-                new NetworkServer(client);
+                new ClientHandler(client);
             }
         }
 
         public void StartListening()
         {
             AcceptConnections = true;
-            Console.WriteLine($"Listener started. Listening to TCP clients at {IPAddress.ToString()}:{Port}");
+            Console.WriteLine($"Listener started. Listening to TCP clients at {IPAddress}:{Port}");
             TcpListener.Start();
             Listen();
         }
@@ -46,7 +46,7 @@ namespace StairsLight
         {
             TcpListener.Stop();
             AcceptConnections = true;
-            Console.WriteLine($"Listener stopped. No more listening to TCP clients at {IPAddress.ToString()}:{Port}");
+            Console.WriteLine($"Listener stopped. No more listening to TCP clients at {IPAddress}:{Port}");
         }
     }
 }

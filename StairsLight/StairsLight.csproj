@@ -72,25 +72,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Color.cs" />
-    <Compile Include="ConstantColorProvider.cs" />
-    <Compile Include="GradientColorProvider.cs" />
-    <Compile Include="HardwarePwmDriver.cs" />
-    <Compile Include="IColorController.cs" />
-    <Compile Include="Listener.cs" />
-    <Compile Include="MockColorController.cs" />
-    <Compile Include="NetworkServer.cs" />
-    <Compile Include="PCA9685ChannelController.cs" />
-    <Compile Include="PCA9685Device.cs" />
-    <Compile Include="PCA9685Manager.cs" />
-    <Compile Include="IColorProvider.cs" />
-    <Compile Include="IPwmDriver.cs" />
+    <Compile Include="NetworkingHandlers\ClientHandler.cs" />
+    <Compile Include="NetworkingHandlers\MessageInfo.cs" />
+    <Compile Include="NetworkingHandlers\OpModes\CascadeOpMode.cs" />
+    <Compile Include="NetworkingHandlers\OpModes\IndividualOpMode.cs" />
+    <Compile Include="NetworkingHandlers\OpModes\IOpMode.cs" />
+    <Compile Include="NetworkingHandlers\ServerManager.cs" />
+    <Compile Include="PwmDrivers\HardwarePwmDriver.cs" />
+    <Compile Include="ColorControllers\IColorController.cs" />
+    <Compile Include="NetworkingHandlers\Listener.cs" />
+    <Compile Include="ColorControllers\MockColorController.cs" />
+    <Compile Include="NetworkingHandlers\OperationModeManager.cs" />
+    <Compile Include="ColorControllers\PCA9685ChannelController.cs" />
+    <Compile Include="PCA9685\PCA9685Device.cs" />
+    <Compile Include="PCA9685\PCA9685Manager.cs" />
+    <Compile Include="PwmDrivers\IPwmDriver.cs" />
     <Compile Include="LedStripe.cs" />
     <Compile Include="MathHelper.cs" />
-    <Compile Include="PcaPwmDriver.cs" />
-    <Compile Include="PinController.cs" />
+    <Compile Include="ColorControllers\PinController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SoftwarePwmDriver.cs" />
+    <Compile Include="PwmDrivers\SoftwarePwmDriver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

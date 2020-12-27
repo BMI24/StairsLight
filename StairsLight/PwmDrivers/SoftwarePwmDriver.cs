@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Unosquare.RaspberryIO.Gpio;
 
-namespace StairsLight
+namespace StairsLight.PwmDrivers
 {
     class SoftwarePwmDriver : IPwmDriver
     {

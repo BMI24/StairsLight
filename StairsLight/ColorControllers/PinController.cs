@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StairsLight.PwmDrivers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading;
 using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Gpio;
 
-namespace StairsLight
+namespace StairsLight.ColorControllers
 {
     class PinController : IColorController
     {

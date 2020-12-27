@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Gpio; 
 
-namespace StairsLight
+namespace StairsLight.PCA9685
 {
     static class PCA9685Manager
     {

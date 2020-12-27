@@ -9,12 +9,10 @@ namespace StairsLight.Networking
     public enum Protocol : byte
     {
         KeepAlive = 1,
-        GetStripeCount = 2,
-        GetColor = 3,
-        SetColor = 4,
+        GetOperationMode = 2,
+        SetOperationMode = 3,
+        OperationModeSpecific = 4,
         GetBrightness = 5,
-        SetBrightness = 6,
-        GetOperationMode = 7,
-        SetOperationMode = 8
+        SetBrightness = 6
     }
 }

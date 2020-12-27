@@ -1,4 +1,4 @@
-﻿namespace StairsLight
+﻿namespace StairsLight.ColorControllers
 {
     interface IColorController
     {

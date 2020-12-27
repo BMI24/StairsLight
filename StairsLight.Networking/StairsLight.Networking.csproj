@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CascadeOperationModeProtocol.cs" />
     <Compile Include="FluentReader.cs" />
     <Compile Include="FluentWriter.cs" />
+    <Compile Include="IndividualOperationModeProtocol.cs" />
     <Compile Include="NetworkClient.cs" />
     <Compile Include="NetworkMessage.cs" />
-    <Compile Include="OperationMode.cs" />
+    <Compile Include="OperationModeIdentifier.cs" />
     <Compile Include="ParsingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol.cs" />

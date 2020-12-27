@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StairsLight.ColorControllers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -7,7 +8,7 @@ namespace StairsLight
 {
     class LedStripe
     {
-        public static object ActiveStripesLock { get; } = new object();
+        private static object ActiveStripesLock { get; } = new object();
         private static List<LedStripe> ActiveStripes = new List<LedStripe>();
 
         public static IReadOnlyList<LedStripe> ActiveStripesReadOnly => ActiveStripes.AsReadOnly();

@@ -1,4 +1,4 @@
-﻿namespace StairsLight
+﻿namespace StairsLight.PwmDrivers
 {
     interface IPwmDriver
     {

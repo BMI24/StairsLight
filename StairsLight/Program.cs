@@ -1,4 +1,7 @@
-﻿using System;
+﻿using StairsLight.Networking;
+using StairsLight.NetworkingHandlers;
+using StairsLight.PCA9685;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -31,7 +34,7 @@ namespace StairsLight
             }
 
 
-            Listener listener = new Listener(NetworkServer.ApplicationPort, IPAddress.Any);
+            Listener listener = new Listener(NetworkClient.ApplicationPort, IPAddress.Any);
             listener.StartListening();
 
             try

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using StairsLight.PCA9685;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unosquare.RaspberryIO.Gpio;
 
-namespace StairsLight
+namespace StairsLight.ColorControllers
 {
     class PCA9685ChannelController : IColorController
     {

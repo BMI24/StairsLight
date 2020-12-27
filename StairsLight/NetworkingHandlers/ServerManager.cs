@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StairsLight
+namespace StairsLight.NetworkingHandlers
 {
-    interface IColorProvider
+    class ServerManager
     {
-        Color NextTickColor { get; }
+        public static OperationModeManager Server { get; set; }
     }
 }
