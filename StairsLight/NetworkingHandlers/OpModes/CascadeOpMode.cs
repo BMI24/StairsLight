@@ -45,7 +45,8 @@ namespace StairsLight.NetworkingHandlers.OpModes
 
         private void ProcesGetSpeed(MessageInfo message)
         {
-            SendData(message, w => w.WriteSingle(Speed));
+            SendData(message, w => w.WriteEnum(CascadeOperationModeProtocol.GetSpeed)
+                .WriteSingle(Speed));
         }
 
         List<CascadePart> _activeCascade;
