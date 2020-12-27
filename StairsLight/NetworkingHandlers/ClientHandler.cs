@@ -17,10 +17,10 @@ namespace StairsLight.NetworkingHandlers
 
         private void ProcessMessage(object sender, NetworkMessage e)
         {
-            if (e == null)
-                Console.WriteLine("e is null");
             try
             {
+                if (e == null)
+                    Console.WriteLine("e is null");
                 ServerManager.Server.ProcessMessage(new MessageInfo(new FluentReader(e.Content), this, e.Header));
             }
             catch (ParsingException)
