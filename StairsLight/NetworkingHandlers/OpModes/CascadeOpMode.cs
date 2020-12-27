@@ -79,7 +79,8 @@ namespace StairsLight.NetworkingHandlers.OpModes
         {
             SendData(message, writer =>
             {
-                writer.WriteInt(ActiveCascade.Count);
+                writer.WriteEnum(CascadeOperationModeProtocol.GetCascade)
+                    .WriteInt(ActiveCascade.Count);
                 for (int i = 0; i < ActiveCascade.Count; i++)
                 {
                     writer.WriteByte(ActiveCascade[i].Color.R)
