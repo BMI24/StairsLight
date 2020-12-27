@@ -27,6 +27,10 @@ namespace StairsLight.NetworkingHandlers
             {
                 Kill();
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
