@@ -56,25 +56,13 @@ namespace StairsLight
             Console.WriteLine(((Exception)e.ExceptionObject).StackTrace);
         }
 
-        static Color GenerateRandomColor() => new Color((byte)RandomProvider.Next(256), (byte)RandomProvider.Next(256), (byte)RandomProvider.Next(256));
-
         static void MainAction()
         {
             while (true)
             {
-                foreach (var stripe in Stripes)
-                {
-                    string colorInput = Console.ReadLine();
-                    if (colorInput == "exit")
-                        return;
-                    var colorInputSplit = colorInput.Split(',');
-                    string colorName = colorInputSplit[0];
-                    float brightness = Convert.ToSingle(colorInputSplit[1]);
-                    var color = (colorName == "random" ? GenerateRandomColor() : Color.GetColor(colorName)) * brightness;
-                    stripe.SetColor(color);
-                    if (colorInputSplit.Length > 2)
-                        LedStripe.Brightness = Convert.ToSingle(colorInputSplit[2]);
-                }
+                string input = Console.ReadLine();
+                if (input == "exit")
+                    return;
             }
         }
     }

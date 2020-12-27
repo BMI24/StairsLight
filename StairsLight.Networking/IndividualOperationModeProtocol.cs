@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StairsLight.Networking
 {
-    public enum IndividualOperationModeProtocol
+    public enum IndividualOperationModeProtocol : byte
     {
         GetStripeCount = 1,
         GetColor = 2,

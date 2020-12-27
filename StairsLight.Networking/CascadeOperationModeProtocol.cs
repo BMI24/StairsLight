@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StairsLight.Networking
 {
-    public enum CascadeOperationModeProtocol
+    public enum CascadeOperationModeProtocol : byte
     {
         GetCascade = 1,
         SetCascade = 2,
