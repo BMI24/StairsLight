@@ -87,6 +87,8 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 throw new ParsingException(null);
 
             message.Reader.ReadEnum<IndividualOperationModeProtocol>(out var protocol);
+
+            Console.WriteLine($"Individal mode received with {protocol}");
             if (!RecieveReaction.TryGetValue(protocol, out var reaction))
                 throw new ParsingException(null);
             
