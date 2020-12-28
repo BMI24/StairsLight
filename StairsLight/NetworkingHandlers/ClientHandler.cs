@@ -23,6 +23,7 @@ namespace StairsLight.NetworkingHandlers
             }
             catch (ParsingException)
             {
+                Console.WriteLine($"Dropped client {Client.Client.RemoteEndPoint} due to ParsingException with message header {e.Header} and body {BitConverter.ToString(e.Content)}");
                 Kill();
             }
         }
