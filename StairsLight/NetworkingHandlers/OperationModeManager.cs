@@ -53,7 +53,8 @@ namespace StairsLight.NetworkingHandlers
 
         private void ProcessOperationModeSpecific(MessageInfo message)
         {
-            CurrentOpMode.ProcessModeSpecificMessage(message);
+            message.Reader.ReadEnum<OperationModeIdentifier>(out var targetOpMode);
+            IdentifierToOpMode[targetOpMode].ProcessModeSpecificMessage(message);
         }
 
 
