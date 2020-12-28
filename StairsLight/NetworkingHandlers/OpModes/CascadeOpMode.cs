@@ -144,11 +144,10 @@ namespace StairsLight.NetworkingHandlers.OpModes
             {
                 for (int i = 0; i < cascadePart.Width; i++)
                 {
-                    currentOffset++;
                     if (currentOffset >= LedStripe.ActiveStripesReadOnly.Count)
                         break;
-                    LedStripe.ActiveStripesReadOnly[i].SetColor(cascadePart.Color);
-                    Console.WriteLine($"Step {i} set to {cascadePart.Color}");
+                    LedStripe.ActiveStripesReadOnly[currentOffset].SetColor(cascadePart.Color);
+                    currentOffset++;
                 }
             }
         }
@@ -163,7 +162,6 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 return;
 
             CurrentOffset += SpeedToIncrementMultiplier * Speed;
-            Console.WriteLine("Current Offset: " + CurrentOffset);
             ApplyCascadeWithOffset(CurrentOffset);
             if (CurrentOffset > StepChangeSteps)
                 CurrentOffset = 0;
