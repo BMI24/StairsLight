@@ -163,6 +163,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 return;
 
             CurrentOffset += SpeedToIncrementMultiplier * Speed;
+            Console.WriteLine("Current Offset: " + CurrentOffset);
             ApplyCascadeWithOffset(CurrentOffset);
             if (CurrentOffset > StepChangeSteps)
                 CurrentOffset = 0;
