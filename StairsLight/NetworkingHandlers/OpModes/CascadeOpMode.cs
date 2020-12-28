@@ -134,7 +134,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 stripe.SetColor(Color.Black);
             }
             LastTickSetStripesIndices = null;
-            StepChangeSteps = StepsCount + ActiveCascade.Sum(c => c.Width) - 1;
+            StepChangeSteps = StepsCount - 1;
             CurrentOffset = 0;
         }
 
@@ -147,8 +147,8 @@ namespace StairsLight.NetworkingHandlers.OpModes
             {
                 for (int i = 0; i < cascadePart.Width; i++)
                 {
-                    if (currentOffset >= LedStripe.ActiveStripesReadOnly.Count)
-                        break;
+                    if (currentOffset == LedStripe.ActiveStripesReadOnly.Count)
+                        currentOffset = 0;
                     LedStripe.ActiveStripesReadOnly[currentOffset].SetColor(cascadePart.Color);
                     currentTickSetIndices.Add(currentOffset);
                     currentOffset++;
