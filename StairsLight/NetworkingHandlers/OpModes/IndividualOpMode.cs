@@ -64,11 +64,12 @@ namespace StairsLight.NetworkingHandlers.OpModes
             }
         }
 
-        public void Activate()
+        void Activate()
         {
             for (int i = 0; i < StripeColors.Length; i++)
             {
                 LedStripe.ActiveStripesReadOnly[i].SetColor(StripeColors[i]);
+                Console.WriteLine($"IndividualOpMode.Activate setting stripe {i} to Color {StripeColors[i]}");
             }
         }
 
