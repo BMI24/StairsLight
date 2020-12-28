@@ -60,8 +60,11 @@ namespace StairsLight
 
         public void SetColor(Color color)
         {
-            Color = color;
-            RefreshShownColor();
+            if (Color != color)
+            {
+                Color = color;
+                RefreshShownColor();
+            }
         }
 
         private void RefreshShownColor()
