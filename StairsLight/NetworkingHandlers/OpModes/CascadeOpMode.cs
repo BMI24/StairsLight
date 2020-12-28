@@ -181,7 +181,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
 
             CurrentOffset += SpeedToIncrementMultiplier * Speed;
             ApplyCascadeWithOffset(CurrentOffset);
-            if (CurrentOffset > StepChangeSteps)
+            if (CurrentOffset > StepChangeSteps + 1)
                 CurrentOffset = 0;
         }
 
