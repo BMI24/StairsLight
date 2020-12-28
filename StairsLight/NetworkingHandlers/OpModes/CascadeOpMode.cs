@@ -139,10 +139,9 @@ namespace StairsLight.NetworkingHandlers.OpModes
         }
 
         List<int> LastTickSetStripesIndices;
-        private void ApplyCascadeWithOffset(float offset)
+        private void ApplyCascadeWithOffset(int currentOffset)
         {
             var currentTickSetIndices = new List<int>();
-            int currentOffset = (int)Math.Floor(offset);
             foreach (var cascadePart in ActiveCascade)
             {
                 for (int i = 0; i < cascadePart.Width; i++)
@@ -174,11 +173,19 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 return;
 
             CurrentOffset += SpeedToIncrementMultiplier * Speed;
-            ApplyCascadeWithOffset(CurrentOffset);
-            if (CurrentOffset > StepChangeSteps + 1)
+            var offsetInt = (int)Math.Floor(CurrentOffset);
+            if (offsetInt > StepChangeSteps + 1)
+            {
                 CurrentOffset = 0;
-            if (CurrentOffset < 0)
+                offsetInt = 0;
+            }
+            if (offsetInt < 0)
+            {
                 CurrentOffset = StepChangeSteps + 1;
+                offsetInt = StepChangeSteps + 1;
+            }
+
+            ApplyCascadeWithOffset(offsetInt);
         }
 
         public void ProcessModeSpecificMessage(MessageInfo message)
