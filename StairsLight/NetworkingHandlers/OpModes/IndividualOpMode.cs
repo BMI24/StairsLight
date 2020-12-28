@@ -25,7 +25,9 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 .ReadByte(out byte r)
                 .ReadByte(out byte g)
                 .ReadByte(out byte b);
-            LedStripe.ActiveStripesReadOnly[ledStripeIndex].SetColor(new Color(r, g, b));
+            var color = new Color(r, g, b);
+            StripeColors[ledStripeIndex] = color;
+            LedStripe.ActiveStripesReadOnly[ledStripeIndex].SetColor(color);
         }
 
         Color[] StripeColors = new Color[LedStripe.ActiveStripesReadOnly.Count];
@@ -69,7 +71,6 @@ namespace StairsLight.NetworkingHandlers.OpModes
             for (int i = 0; i < StripeColors.Length; i++)
             {
                 LedStripe.ActiveStripesReadOnly[i].SetColor(StripeColors[i]);
-                Console.WriteLine($"IndividualOpMode.Activate setting stripe {i} to Color {StripeColors[i]}");
             }
         }
 
