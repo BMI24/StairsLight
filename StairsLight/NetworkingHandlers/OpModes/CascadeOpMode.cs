@@ -133,12 +133,15 @@ namespace StairsLight.NetworkingHandlers.OpModes
             {
                 stripe.SetColor(Color.Black);
             }
+            LastTickSetStripesIndices = null;
             StepChangeSteps = StepsCount + ActiveCascade.Sum(c => c.Width) - 1;
             CurrentOffset = 0;
         }
 
+        List<int> LastTickSetStripesIndices;
         private void ApplyCascadeWithOffset(float offset)
         {
+            var currentTickSetIndices = new List<int>();
             int currentOffset = (int)Math.Floor(offset);
             foreach (var cascadePart in ActiveCascade)
             {
@@ -147,9 +150,18 @@ namespace StairsLight.NetworkingHandlers.OpModes
                     if (currentOffset >= LedStripe.ActiveStripesReadOnly.Count)
                         break;
                     LedStripe.ActiveStripesReadOnly[currentOffset].SetColor(cascadePart.Color);
+                    currentTickSetIndices.Add(currentOffset);
                     currentOffset++;
                 }
             }
+            if (LastTickSetStripesIndices != null)
+            {
+                foreach (var index in currentTickSetIndices.Except(LastTickSetStripesIndices))
+                {
+                    LedStripe.ActiveStripesReadOnly[index].SetColor(Color.Black);
+                }
+            }
+            LastTickSetStripesIndices = currentTickSetIndices;
         }
 
         Timer UpdateCascadeTimer;
