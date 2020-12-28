@@ -129,45 +129,33 @@ namespace StairsLight.NetworkingHandlers.OpModes
         private void Activate()
         {
             UpdateCascadeTimer.Change(UpdateCascadeTimerFrequency, UpdateCascadeTimerFrequency);
-            foreach (var stripe in LedStripe.ActiveStripesReadOnly)
-            {
-                stripe.SetColor(Color.Black);
-            }
-            LastTickSetStripesIndices = null;
+            ResetToBlack();
             StepChangeSteps = StepsCount - 1;
             CurrentOffset = 0;
         }
 
-        List<int> LastTickSetStripesIndices;
+        void ResetToBlack()
+        {
+            foreach (var stripe in LedStripe.ActiveStripesReadOnly)
+            {
+                stripe.SetColor(Color.Black);
+            }
+        }
         private void ApplyCascadeWithOffset(float offset)
         {
-            var currentTickSetIndices = new List<int>();
+            ResetToBlack();
             int currentOffset = (int)Math.Floor(offset);
             foreach (var cascadePart in ActiveCascade)
             {
                 for (int i = 0; i < cascadePart.Width; i++)
                 {
-                    if (!_active)
-                        return;
-
                     if (currentOffset == LedStripe.ActiveStripesReadOnly.Count)
                         currentOffset = 0;
+
                     LedStripe.ActiveStripesReadOnly[currentOffset].SetColor(cascadePart.Color);
-                    currentTickSetIndices.Add(currentOffset);
                     currentOffset++;
                 }
             }
-            if (LastTickSetStripesIndices != null)
-            {
-                foreach (var index in LastTickSetStripesIndices.Except(currentTickSetIndices))
-                {
-                    if (!_active)
-                        return;
-
-                    LedStripe.ActiveStripesReadOnly[index].SetColor(Color.Black);
-                }
-            }
-            LastTickSetStripesIndices = currentTickSetIndices;
         }
 
         Timer UpdateCascadeTimer;
@@ -183,6 +171,8 @@ namespace StairsLight.NetworkingHandlers.OpModes
             ApplyCascadeWithOffset(CurrentOffset);
             if (CurrentOffset > StepChangeSteps + 1)
                 CurrentOffset = 0;
+            if (CurrentOffset < 0)
+                CurrentOffset = StepChangeSteps + 1;
         }
 
         public void ProcessModeSpecificMessage(MessageInfo message)
