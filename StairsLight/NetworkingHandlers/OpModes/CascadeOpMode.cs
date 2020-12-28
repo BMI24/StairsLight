@@ -156,7 +156,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
             }
             if (LastTickSetStripesIndices != null)
             {
-                foreach (var index in currentTickSetIndices.Except(LastTickSetStripesIndices))
+                foreach (var index in LastTickSetStripesIndices.Except(currentTickSetIndices))
                 {
                     LedStripe.ActiveStripesReadOnly[index].SetColor(Color.Black);
                 }
