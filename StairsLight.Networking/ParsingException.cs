@@ -8,7 +8,7 @@ namespace StairsLight.Networking
 {
     public class ParsingException : Exception
     {
-        public ParsingException(Exception inner) : base("", inner)
+        public ParsingException(Exception inner, string message = "") : base(message, inner)
         {
         }
     }

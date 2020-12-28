@@ -84,13 +84,13 @@ namespace StairsLight.NetworkingHandlers.OpModes
         {
             message.Reader.ReadEnum<OperationModeIdentifier>(out var opMode);
             if (opMode != OperationModeIdentifier.Individual)
-                throw new ParsingException(null);
+                throw new ParsingException(null, $"{nameof(IndividualOpMode)} received message with foreign {nameof(OperationModeIdentifier)}.{opMode}.");
 
             message.Reader.ReadEnum<IndividualOperationModeProtocol>(out var protocol);
 
             if (!RecieveReaction.TryGetValue(protocol, out var reaction))
-                throw new ParsingException(null);
-            
+                throw new ParsingException(null, $"{nameof(IndividualOpMode)} received message with {nameof(IndividualOperationModeProtocol)}.{protocol} which is not supported");
+
             reaction(message);
         }
     }

@@ -21,9 +21,9 @@ namespace StairsLight.NetworkingHandlers
             {
                 ServerManager.Server.ProcessMessage(new MessageInfo(new FluentReader(e.Content), this, e.Header));
             }
-            catch (ParsingException)
+            catch (ParsingException ex)
             {
-                Console.WriteLine($"Dropped client {Client.Client.RemoteEndPoint} due to ParsingException with message header {e.Header} and body {BitConverter.ToString(e.Content)}");
+                Console.WriteLine($"Dropped client {Client.Client.RemoteEndPoint} due to ParsingException with message header {e.Header} and body {BitConverter.ToString(e.Content)}. Exception message: {ex.Message}");
                 Kill();
             }
         }

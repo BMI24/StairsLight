@@ -69,7 +69,7 @@ namespace StairsLight.Networking
                 output = (T)enumNumericValue;
                 return this;
             }
-            throw new ParsingException(null);
+            throw new ParsingException(null, $"The enumtype {typeof(T)} has no defined value for numeric value {enumNumericValue}");
         }
 
         public FluentReader ReadByte(out byte output)

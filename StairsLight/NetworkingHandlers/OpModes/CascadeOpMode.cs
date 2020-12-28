@@ -171,11 +171,11 @@ namespace StairsLight.NetworkingHandlers.OpModes
         {
             message.Reader.ReadEnum<OperationModeIdentifier>(out var opMode);
             if (opMode != OperationModeIdentifier.Cascade)
-                throw new ParsingException(null);
+                throw new ParsingException(null, $"{nameof(CascadeOpMode)} received message with foreign {nameof(OperationModeIdentifier)}.{opMode}.");
 
             message.Reader.ReadEnum<CascadeOperationModeProtocol>(out var protocol);
             if (!RecieveReaction.TryGetValue(protocol, out var reaction))
-                throw new ParsingException(null);
+                throw new ParsingException(null, $"{nameof(CascadeOpMode)} received message with {nameof(CascadeOperationModeProtocol)}.{protocol} which is not supported");
 
             reaction(message);
         }
