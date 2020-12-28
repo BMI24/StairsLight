@@ -147,9 +147,6 @@ namespace StairsLight.NetworkingHandlers.OpModes
             {
                 for (int i = 0; i < cascadePart.Width; i++)
                 {
-                    if (!_active)
-                        return;
-
                     if (currentOffset == LedStripe.ActiveStripesReadOnly.Count)
                         currentOffset = 0;
                     LedStripe.ActiveStripesReadOnly[currentOffset].SetColor(cascadePart.Color);
@@ -161,9 +158,6 @@ namespace StairsLight.NetworkingHandlers.OpModes
             {
                 foreach (var index in LastTickSetStripesIndices.Except(currentTickSetIndices))
                 {
-                    if (!_active)
-                        return;
-
                     LedStripe.ActiveStripesReadOnly[index].SetColor(Color.Black);
                 }
             }
@@ -183,6 +177,8 @@ namespace StairsLight.NetworkingHandlers.OpModes
             ApplyCascadeWithOffset(CurrentOffset);
             if (CurrentOffset > StepChangeSteps + 1)
                 CurrentOffset = 0;
+            if (CurrentOffset < 0)
+                CurrentOffset = StepChangeSteps + 1;
         }
 
         public void ProcessModeSpecificMessage(MessageInfo message)
