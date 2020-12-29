@@ -75,6 +75,7 @@
     <Compile Include="NetworkingHandlers\ClientHandler.cs" />
     <Compile Include="NetworkingHandlers\MessageInfo.cs" />
     <Compile Include="NetworkingHandlers\OpModes\CascadeOpMode.cs" />
+    <Compile Include="NetworkingHandlers\OpModes\CircadiusOpMode.cs" />
     <Compile Include="NetworkingHandlers\OpModes\IndividualOpMode.cs" />
     <Compile Include="NetworkingHandlers\OpModes\IOpMode.cs" />
     <Compile Include="NetworkingHandlers\OpModes\OpModeBase.cs" />

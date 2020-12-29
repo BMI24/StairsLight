@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CascadeOperationModeProtocol.cs" />
+    <Compile Include="CircadiusOperationModeProtocol.cs" />
     <Compile Include="FluentReader.cs" />
     <Compile Include="FluentWriter.cs" />
     <Compile Include="IndividualOperationModeProtocol.cs" />

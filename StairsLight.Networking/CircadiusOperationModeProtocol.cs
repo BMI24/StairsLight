@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace StairsLight.Networking
 {
-    public enum OperationModeIdentifier : byte
+    public enum CircadiusOperationModeProtocol
     {
-        Invalid = 0,
-        Individual = 1,
-        Cascade = 2,
-        Circadius
+        GetCircadialParts = 1,
+        SetCircadialParts = 2
     }
 }
