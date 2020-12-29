@@ -171,6 +171,35 @@ namespace StairsLight.Networking
             }
         }
 
+        public FluentReader ReadColor(out byte r, out byte g, out byte b)
+        {
+            try
+            {
+                ReadByte(out r);
+                ReadByte(out g);
+                ReadByte(out b);
+                return this;
+            }
+            catch (Exception e) when (!(e is ParsingException))
+            {
+                throw new ParsingException(e);
+            }
+        }
+
+        public FluentReader ReadTimeSpan(out TimeSpan timeSpan)
+        {
+            try
+            {
+                ReadLong(out var ticks);
+                timeSpan = new TimeSpan(ticks);
+                return this;
+            }
+            catch (Exception e) when (!(e is ParsingException))
+            {
+                throw new ParsingException(e);
+            }
+        }
+
         public byte[] ReadToEnd()
         {
             try

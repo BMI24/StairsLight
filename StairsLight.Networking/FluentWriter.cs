@@ -78,6 +78,20 @@ namespace StairsLight.Networking
             return this;
         }
 
+        public FluentWriter WriteColor(byte r, byte g, byte b)
+        {
+            WriteByte(r);
+            WriteByte(g);
+            WriteByte(b);
+            return this;
+        }
+
+        public FluentWriter WriteTimeSpan(TimeSpan timeSpan)
+        {
+            WriteLong(timeSpan.Ticks);
+            return this;
+        }
+
         public static byte[] ToUTF8(object o) => Encoding.UTF8.GetBytes(o.ToString() + '\0');
     }
 }
