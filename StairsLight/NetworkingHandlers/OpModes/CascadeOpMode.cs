@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StairsLight.NetworkingHandlers.OpModes
 {
-    class CascadeOpMode : IOpMode
+    class CascadeOpMode : OpModeBase<CascadeOperationModeProtocol>
     {
         class CascadePart
         {
@@ -21,18 +21,13 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 Color = color;
             }
         }
-
-        public Dictionary<CascadeOperationModeProtocol, Action<MessageInfo>> RecieveReaction;
-
-        public CascadeOpMode()
+        public CascadeOpMode() : base(OperationModeIdentifier.Cascade)
         {
-            RecieveReaction = new Dictionary<CascadeOperationModeProtocol, Action<MessageInfo>>
-            {
-                { CascadeOperationModeProtocol.GetCascade, ProcessGetCascade },
-                { CascadeOperationModeProtocol.GetSpeed, ProcesGetSpeed },
-                { CascadeOperationModeProtocol.SetCascade, ProcessSetCascade },
-                { CascadeOperationModeProtocol.SetSpeed, ProcessSetSpeed }
-            };
+            RegisterReaction(CascadeOperationModeProtocol.GetCascade, ProcessGetCascade);
+            RegisterReaction(CascadeOperationModeProtocol.GetSpeed, ProcesGetSpeed);
+            RegisterReaction(CascadeOperationModeProtocol.SetCascade, ProcessSetCascade);
+            RegisterReaction(CascadeOperationModeProtocol.SetSpeed, ProcessSetSpeed);
+           
             ActiveCascade = new List<CascadePart>();
             UpdateCascadeTimer = new Timer(UpdateCascade, null, Timeout.Infinite, Timeout.Infinite);
         }
@@ -45,8 +40,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
 
         private void ProcesGetSpeed(MessageInfo message)
         {
-            SendData(message, w => w.WriteEnum(CascadeOperationModeProtocol.GetSpeed)
-                .WriteSingle(Speed));
+            SendData(message, w => w.WriteSingle(Speed), CascadeOperationModeProtocol.GetSpeed);
         }
 
         List<CascadePart> _activeCascade;
@@ -72,15 +66,15 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 newCascade.Add(new CascadePart(width, new Color(colorR, colorG, colorB)));
             }
             ActiveCascade = newCascade;
-            Activate();
+            if (Active)
+                OnActivate();
         }
 
         private void ProcessGetCascade(MessageInfo message)
         {
             SendData(message, writer =>
             {
-                writer.WriteEnum(CascadeOperationModeProtocol.GetCascade)
-                    .WriteInt(ActiveCascade.Count);
+                writer.WriteInt(ActiveCascade.Count);
                 for (int i = 0; i < ActiveCascade.Count; i++)
                 {
                     writer.WriteByte(ActiveCascade[i].Color.R)
@@ -89,44 +83,9 @@ namespace StairsLight.NetworkingHandlers.OpModes
                         .WriteInt(ActiveCascade[i].Width);
                 }
                 return writer;
-            });
+            }, CascadeOperationModeProtocol.GetCascade);
         }
-
-        private void SendData(MessageInfo message, Func<FluentWriter, FluentWriter> writerFunc)
-        {
-            message.RespondWith(
-                writerFunc(new FluentWriter()
-                .WriteEnum(Protocol.OperationModeSpecific)
-                .WriteEnum(OperationModeIdentifier.Cascade)));
-        }
-
-        bool _active;
-        bool IOpMode.Active
-        {
-            get
-            {
-                return _active;
-            }
-            set 
-            {
-                if (!_active && value)
-                    Activate();
-                else if (_active && !value)
-                    Deactivate();
-                _active = value;
-            }
-        }
-        private void Deactivate()
-        {
-            UpdateCascadeTimer.Change(Timeout.Infinite, Timeout.Infinite);
-        }
-
-        const int TicksPerSecond = 20;
-        const int UpdateCascadeTimerFrequency = 1000 / TicksPerSecond;
-        const float SpeedToIncrementMultiplier = 0.5f / TicksPerSecond;
-
-        int StepChangeSteps;
-        private void Activate()
+        protected override void OnActivate()
         {
             UpdateCascadeTimer.Change(UpdateCascadeTimerFrequency, UpdateCascadeTimerFrequency);
             foreach (var stripe in LedStripe.ActiveStripesReadOnly)
@@ -137,6 +96,15 @@ namespace StairsLight.NetworkingHandlers.OpModes
             StepChangeSteps = StepsCount - 1;
             CurrentOffset = 0;
         }
+        protected override void OnDeactivate()
+        {
+            UpdateCascadeTimer.Change(Timeout.Infinite, Timeout.Infinite);
+        }
+
+        const int TicksPerSecond = 20;
+        const int UpdateCascadeTimerFrequency = 1000 / TicksPerSecond;
+        const float SpeedToIncrementMultiplier = 0.5f / TicksPerSecond;
+        int StepChangeSteps;
 
         List<int> LastTickSetStripesIndices;
         private void ApplyCascadeWithOffset(int currentOffset)
@@ -169,7 +137,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
         float CurrentOffset;
         void UpdateCascade(object state)
         {
-            if (!_active)
+            if (!Active)
                 return;
 
             CurrentOffset += SpeedToIncrementMultiplier * Speed;
@@ -186,15 +154,6 @@ namespace StairsLight.NetworkingHandlers.OpModes
             }
 
             ApplyCascadeWithOffset(offsetInt);
-        }
-
-        public void ProcessModeSpecificMessage(MessageInfo message)
-        {
-            message.Reader.ReadEnum<CascadeOperationModeProtocol>(out var protocol);
-            if (!RecieveReaction.TryGetValue(protocol, out var reaction))
-                throw new ParsingException(null, $"{nameof(CascadeOpMode)} received message with {nameof(CascadeOperationModeProtocol)}.{protocol} which is not supported");
-
-            reaction(message);
         }
     }
 }
