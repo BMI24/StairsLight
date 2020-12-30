@@ -80,8 +80,8 @@ namespace StairsLight.NetworkingHandlers.OpModes
                     .ReadColor(out var r, out var g, out var b);
                 parts.Add(new CircadiusPart(time, new Color(r, g, b)));
             }
-            return;
             ActiveCircadiusParts = parts;
+            return;
             if (Active)
                 UpdateColor(null);
         }
