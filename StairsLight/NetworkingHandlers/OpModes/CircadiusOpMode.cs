@@ -36,6 +36,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
                 SetColor(Color.Black);
                 return;
             }
+            return;
             var currentTimeOfDay = DateTime.Now.TimeOfDay;
             var prevCircPart = ActiveCircadiusParts.LastOrDefault(p => p.Time < currentTimeOfDay) ?? ActiveCircadiusParts.Last();
             var nextCircPart = ActiveCircadiusParts.FirstOrDefault(p => p.Time >= currentTimeOfDay) ?? ActiveCircadiusParts.First();
