@@ -63,7 +63,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
         protected override void OnActivate()
         {
             //Keep in mind: setting TimeSpan.Zero as first argument will make the callback being called instantly
-            UpdateColorTimer.Change(TimeSpan.Zero, TimeSpan.FromSeconds(10));
+            UpdateColorTimer.Change(TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
         protected override void OnDeactivate()
         {
