@@ -71,12 +71,12 @@ namespace StairsLight.NetworkingHandlers.OpModes
         }
         private void ProcessSetCircadialParts(MessageInfo message)
         {
+            return;
             List<CircadiusPart> parts = new List<CircadiusPart>();
             var reader = message.Reader;
             reader.ReadInt(out var count);
             for (int i = 0; i < count; i++)
             {
-                continue;
                 reader.ReadTimeSpan(out var time)
                     .ReadColor(out var r, out var g, out var b);
                 parts.Add(new CircadiusPart(time, new Color(r, g, b)));
