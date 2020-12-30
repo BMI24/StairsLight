@@ -25,7 +25,7 @@ namespace StairsLight.NetworkingHandlers.OpModes
         private bool _active;
         public bool Active
         {
-            get => Active;
+            get => _active;
             set
             {
                 if (value && !_active)
