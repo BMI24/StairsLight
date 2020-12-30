@@ -76,9 +76,9 @@ namespace StairsLight.NetworkingHandlers.OpModes
             reader.ReadInt(out var count);
             for (int i = 0; i < count; i++)
             {
+                continue;
                 reader.ReadTimeSpan(out var time)
                     .ReadColor(out var r, out var g, out var b);
-                continue;
                 parts.Add(new CircadiusPart(time, new Color(r, g, b)));
             }
             ActiveCircadiusParts = parts;
