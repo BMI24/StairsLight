@@ -25,7 +25,8 @@ namespace StairsLight.NetworkingHandlers
             IdentifierToOpMode = new Dictionary<OperationModeIdentifier, IOpMode>()
             {
                 { OperationModeIdentifier.Individual, new IndividualOpMode() },
-                { OperationModeIdentifier.Cascade, new CascadeOpMode() }
+                { OperationModeIdentifier.Cascade, new CascadeOpMode() },
+                { OperationModeIdentifier.Circadius, new CircadiusOpMode() }
             };
             CurrentOpMode = IdentifierToOpMode[OperationModeIdentifier.Individual];
         }
