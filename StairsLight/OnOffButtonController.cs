@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Gpio;
@@ -26,7 +27,7 @@ namespace StairsLight
             {
                 var gpioPin = Pi.Gpio.GetGpioPinByBcmPinNumber(buttonBcm);
                 gpioPin.PinMode = GpioPinDriveMode.Input;
-                gpioPin.InputPullMode = GpioPinResistorPullMode.PullUp;
+                Thread.Sleep(200);
                 gpioPin.RegisterInterruptCallback(EdgeDetection.RisingEdge, RisingEdgeDetected);
             }
         }
