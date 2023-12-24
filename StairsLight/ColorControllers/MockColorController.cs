@@ -2,8 +2,11 @@
 {
     class MockColorController : IColorController
     {
-        public void SetBrightness(float percentage)
+        public float Brightness { get; set; }
+
+        public void Refresh()
         {
+
         }
     }
 }

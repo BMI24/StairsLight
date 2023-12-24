@@ -80,6 +80,7 @@
     <Compile Include="NetworkingHandlers\OpModes\IOpMode.cs" />
     <Compile Include="NetworkingHandlers\OpModes\OpModeBase.cs" />
     <Compile Include="NetworkingHandlers\ServerManager.cs" />
+    <Compile Include="OnOffButtonController.cs" />
     <Compile Include="PwmDrivers\HardwarePwmDriver.cs" />
     <Compile Include="ColorControllers\IColorController.cs" />
     <Compile Include="NetworkingHandlers\Listener.cs" />

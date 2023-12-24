@@ -67,11 +67,18 @@ namespace StairsLight
             }
         }
 
-        private void RefreshShownColor()
+        public void RefreshShownColor(bool recalculateColors = true)
         {
-            GreenController.SetBrightness(Color.G / 255f * Brightness);
-            RedController.SetBrightness(Color.R / 255f * Brightness);
-            BlueController.SetBrightness(Color.B / 255f * Brightness);
+            if (recalculateColors)
+            {
+                GreenController.Brightness = Color.G / 255f * Brightness;
+                RedController.Brightness = Color.R / 255f * Brightness;
+                BlueController.Brightness = Color.B / 255f * Brightness;
+            }
+
+            GreenController.Refresh();
+            RedController.Refresh();
+            RedController.Refresh();
         }
     }
 }

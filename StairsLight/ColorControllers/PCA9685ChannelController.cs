@@ -12,9 +12,11 @@ namespace StairsLight.ColorControllers
     {
         private int LedIndex;
         private PCA9685Device PCADevice;
-        public void SetBrightness(float percentage)
+        public float Brightness { get; set; }
+
+        public void Refresh()
         {
-            PCADevice.SetBrightness(LedIndex, percentage);
+            PCADevice.SetBrightness(LedIndex, OnOffButtonController.Instance.State ? Brightness : 0);
         }
 
         public PCA9685ChannelController(PCA9685Device pcaDevice, int ledIndex)

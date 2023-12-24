@@ -2,6 +2,7 @@
 {
     interface IColorController
     {
-        void SetBrightness(float percentage);
+        void Refresh();
+        float Brightness { get; set; }
     }
 }

@@ -29,11 +29,16 @@ namespace StairsLight.ColorControllers
             }
         }
 
-        public void SetBrightness(float percentage) => PwmDriver.SetDutyCylce(percentage);
+        public void Refresh()
+        {
+            PwmDriver.SetDutyCylce(OnOffButtonController.Instance.State ? Brightness : 0);
+        }
 
         public readonly int BcmIndex;
         public readonly GpioPin Pin;
         private IPwmDriver PwmDriver;
+
+        public float Brightness { get; set; }
 
         public PinController(int bcmIndex, int dutyCycle = 0)
         {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Gpio;
 
 namespace StairsLight
@@ -21,6 +22,8 @@ namespace StairsLight
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+            OnOffButtonController.Initialize(26);
+
             var redController = PCA9685Manager.GetDevice(0x42);
             var blueController = PCA9685Manager.GetDevice(0x43);
             var greenController = PCA9685Manager.GetDevice(0x41);
@@ -32,6 +35,17 @@ namespace StairsLight
                 Stripes.Add(new LedStripe(redController.GetChannelController(i), greenController.GetChannelController(i)
                     , blueController.GetChannelController(StairsStepCount - i), Color.Black));
             }
+
+            void stateChanged(object sender, bool e)
+            {
+                foreach (var stripe in Stripes)
+                {
+                    stripe.RefreshShownColor(recalculateColors: false);
+                }
+            }
+
+            OnOffButtonController.Instance.StateChanged += stateChanged;
+
 
             ServerManager.Server = new OperationModeManager();
             Listener listener = new Listener(NetworkClient.ApplicationPort, IPAddress.Any);
