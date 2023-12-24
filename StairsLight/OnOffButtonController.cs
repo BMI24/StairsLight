@@ -14,7 +14,7 @@ namespace StairsLight
         public static OnOffButtonController Instance;
 
         public event EventHandler<bool> StateChanged;
-        public bool State;
+        public bool State = true;
 
         public static void Initialize(params int[] buttonPcms)
         {
@@ -27,13 +27,14 @@ namespace StairsLight
             {
                 var gpioPin = Pi.Gpio.GetGpioPinByBcmPinNumber(buttonBcm);
                 gpioPin.PinMode = GpioPinDriveMode.Input;
-                Thread.Sleep(200);
                 gpioPin.RegisterInterruptCallback(EdgeDetection.RisingEdge, RisingEdgeDetected);
             }
         }
 
         private void RisingEdgeDetected()
         {
+            return;
+
             State = !State;
             StateChanged?.Invoke(this, State);
         }
