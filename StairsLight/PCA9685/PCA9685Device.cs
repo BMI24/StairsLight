@@ -69,7 +69,8 @@ namespace StairsLight.PCA9685
         void WriteAddressByte(int address, byte data, int maxRetryCount = 150)
         {
             bool success = false;
-            for (int i = 0; i < maxRetryCount && !success; i++)
+            int i;
+            for (i = 0; i < maxRetryCount && !success; i++)
             {
                 try
                 {
@@ -79,7 +80,10 @@ namespace StairsLight.PCA9685
                 catch (HardwareException e) when (e.ErrorCode == 121)
                 {
                     if (i == maxRetryCount - 1)
+                    {
+                        Console.WriteLine($"Error writing to I2C address: {address}");
                         throw;
+                    }
                 }
             }
         }
