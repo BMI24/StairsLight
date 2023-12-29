@@ -33,8 +33,6 @@ namespace StairsLight
 
         private void RisingEdgeDetected()
         {
-            return;
-
             State = !State;
             StateChanged?.Invoke(this, State);
         }
