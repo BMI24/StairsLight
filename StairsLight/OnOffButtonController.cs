@@ -28,12 +28,12 @@ namespace StairsLight
             {
                 var gpioPin = Pi.Gpio.GetGpioPinByBcmPinNumber(buttonBcm);
                 gpioPin.PinMode = GpioPinDriveMode.Input;
-                gpioPin.InputPullMode = GpioPinResistorPullMode.PullDown;
-                gpioPin.RegisterInterruptCallback(EdgeDetection.RisingEdge, RisingEdgeDetected);
+                gpioPin.InputPullMode = GpioPinResistorPullMode.PullUp;
+                gpioPin.RegisterInterruptCallback(EdgeDetection.FallingEdge, FallingEdgeDetected);
             }
         }
 
-        private void RisingEdgeDetected()
+        private void FallingEdgeDetected()
         {
             if (DateTime.UtcNow - LastChange < MinTimeSpanBetweenChanges)
                 return;
