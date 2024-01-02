@@ -16,7 +16,7 @@ namespace StairsLight
         public event EventHandler<bool> StateChanged;
         public bool State = true;
         DateTime LastChange = DateTime.MinValue;
-        TimeSpan DebounceTime = TimeSpan.FromSeconds(0.1);
+        TimeSpan DebounceTime = TimeSpan.FromSeconds(0.5);
         public static void Initialize(params int[] buttonPcms)
         {
             Instance = new OnOffButtonController(buttonPcms);
