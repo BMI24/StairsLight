@@ -40,6 +40,7 @@ namespace StairsLight
 
             LastChange = DateTime.UtcNow;
             State = !State;
+            Console.WriteLine($"{DateTime.Now} Detected button press. Changing state to {State}");
             StateChanged?.Invoke(this, State);
         }
     }
