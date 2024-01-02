@@ -16,7 +16,7 @@ namespace StairsLight
         public event EventHandler<bool> StateChanged;
         public bool State = true;
         DateTime LastChange = DateTime.MinValue;
-        TimeSpan MinTimeSpanBetweenChanges = TimeSpan.FromSeconds(1);
+        TimeSpan DebounceTime = TimeSpan.FromSeconds(0.1);
         public static void Initialize(params int[] buttonPcms)
         {
             Instance = new OnOffButtonController(buttonPcms);
@@ -35,7 +35,7 @@ namespace StairsLight
 
         private void FallingEdgeDetected()
         {
-            if (DateTime.UtcNow - LastChange < MinTimeSpanBetweenChanges)
+            if (DateTime.UtcNow - LastChange < DebounceTime)
                 return;
 
             LastChange = DateTime.UtcNow;
