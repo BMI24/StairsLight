@@ -42,7 +42,7 @@ namespace StairsLight
             LastPress = DateTime.UtcNow;
 
             if (timeSinceLastPress < TimeSpan.FromSeconds(0.15) 
-                || timeSinceLastPress > TimeSpan.FromSeconds(2))
+                || timeSinceLastPress > TimeSpan.FromSeconds(1))
                 return;
 
             var timeSinceLastChange = DateTime.UtcNow - LastChange;
