@@ -35,6 +35,8 @@ namespace StairsLight
 
         private void FallingEdgeDetected()
         {
+            Console.WriteLine($"{DateTime.Now:O} Detected button press. Changing state to {State}");
+
             if (DateTime.UtcNow - LastChange < DebounceTime)
                 return;
 
