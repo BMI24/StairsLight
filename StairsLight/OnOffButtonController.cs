@@ -35,14 +35,14 @@ namespace StairsLight
 
         private void FallingEdgeDetected()
         {
-            Console.WriteLine($"{DateTime.Now:O} Detected button press. Changing state to {State}");
+            Console.WriteLine($"{DateTime.Now:O} Detected button press");
 
             if (DateTime.UtcNow - LastChange < DebounceTime)
                 return;
 
             LastChange = DateTime.UtcNow;
             State = !State;
-            Console.WriteLine($"{DateTime.Now} Detected button press. Changing state to {State}");
+            Console.WriteLine($"Changing state to {State}");
             StateChanged?.Invoke(this, State);
         }
     }
